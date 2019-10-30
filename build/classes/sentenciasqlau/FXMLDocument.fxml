@@ -18,10 +18,13 @@
             </Label>
             <TextArea fx:id="textSentencia" layoutX="93.0" layoutY="76.0" prefHeight="91.0" prefWidth="416.0" promptText="Ingrese la sentencia" />
             <Button fx:id="Ejecutar" layoutX="272.0" layoutY="173.0" mnemonicParsing="false" onAction="#btnEjecutar" text="Ejecutar" />
-            <TableView fx:id="tabla" layoutX="31.0" layoutY="227.0" prefHeight="200.0" prefWidth="539.0">
+            <TableView layoutX="42.0" layoutY="209.0" prefHeight="200.0" prefWidth="521.0">
               <columns>
-                <TableColumn fx:id="tablaReservada" prefWidth="150.0" text="Reservadas" />
-                <TableColumn minWidth="0.0" prefWidth="100.0" text="C2" />
+                <TableColumn fx:id="tablaReservada" prefWidth="150.0" text="Palabras reservadas" />
+                <TableColumn fx:id="identificadores" minWidth="0.0" prefWidth="102.0" text="Identificadores" />
+                  <TableColumn fx:id="simbolos" prefWidth="75.0" text="Simbolos" />
+                  <TableColumn fx:id="operadores" prefWidth="75.0" text="Operadores" />
+                  <TableColumn fx:id="errores" prefWidth="118.0" text="Errores" />
               </columns>
             </TableView>
          </children>
