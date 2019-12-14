@@ -9,7 +9,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="454.0" prefWidth="601.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sentenciasqlau.FXMLDocumentController">
    <children>
-      <AnchorPane prefHeight="454.0" prefWidth="601.0">
+      <AnchorPane prefHeight="454.0" prefWidth="601.0" style="-fx-background-color: #4491C1;">
          <children>
             <Label layoutX="164.0" layoutY="23.0" prefHeight="46.0" prefWidth="274.0" text="Sentencias TRIGGERS SQL">
                <font>
@@ -18,15 +18,18 @@
             </Label>
             <TextArea fx:id="textSentencia" layoutX="93.0" layoutY="76.0" prefHeight="91.0" prefWidth="416.0" promptText="Ingrese la sentencia" />
             <Button fx:id="Ejecutar" layoutX="272.0" layoutY="173.0" mnemonicParsing="false" onAction="#btnEjecutar" text="Ejecutar" />
-            <TableView layoutX="42.0" layoutY="209.0" prefHeight="200.0" prefWidth="521.0">
-              <columns>
-                <TableColumn fx:id="tablaReservada" prefWidth="150.0" text="Palabras reservadas" />
-                <TableColumn fx:id="identificadores" minWidth="0.0" prefWidth="102.0" text="Identificadores" />
-                  <TableColumn fx:id="simbolos" prefWidth="75.0" text="Simbolos" />
-                  <TableColumn fx:id="operadores" prefWidth="75.0" text="Operadores" />
-                  <TableColumn fx:id="errores" prefWidth="118.0" text="Errores" />
-              </columns>
-            </TableView>
+            <TextArea fx:id="tablaReservada" editable="false" layoutX="22.0" layoutY="240.0" prefHeight="200.0" prefWidth="121.0" />
+            <Label layoutX="34.0" layoutY="219.0" text="Palabras reservadas" />
+            <Label layoutX="163.0" layoutY="219.0" text="Identificadores" />
+            <Label layoutX="276.0" layoutY="219.0" text="Simbolos" />
+            <Label layoutX="352.0" layoutY="219.0" text="Operadores" />
+            <Label layoutX="519.0" layoutY="219.0" text="Errores" />
+            <TextArea fx:id="identificadores" editable="false" layoutX="150.0" layoutY="240.0" prefHeight="200.0" prefWidth="104.0" />
+            <TextArea fx:id="simbolos" editable="false" layoutX="262.0" layoutY="240.0" prefHeight="200.0" prefWidth="79.0" />
+            <TextArea fx:id="operadores" editable="false" layoutX="352.0" layoutY="240.0" prefHeight="200.0" prefWidth="63.0" />
+            <TextArea fx:id="errores" editable="false" layoutX="498.0" layoutY="236.0" prefHeight="200.0" prefWidth="79.0" />
+            <Label layoutX="427.0" layoutY="219.0" text="Asignacion" />
+            <TextArea fx:id="asignacion" layoutX="425.0" layoutY="240.0" prefHeight="200.0" prefWidth="63.0" />
          </children>
       </AnchorPane>
    </children>

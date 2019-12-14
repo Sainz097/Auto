@@ -28,17 +28,17 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 public class FXMLDocumentController implements Initializable {
     String[] reservada={"DROP","TEXT","CONCAT","DECLARE","CREATE","TRIGGER","INSERT","UPDATE","DELETE","ON","FOR","EACH","ROW","BEFORE","AFTER","INTO","FROM","SET","WHERE","NEW","BEGIN","END","VALUES"};
-    char[] simbolos={',','.','(',')','{','}',';'};
+    char[] simbolo={',','.','(',')','{','}',';'};
     String busqueda;
     @FXML
-    private TextArea textSentencia;
+    private TextArea textSentencia,tablaReservada,identificadores,simbolos,operadores,errores,asignacion;
     @FXML
     private Button Ejecutar;
     @FXML
     private TableView tabla;
-    @FXML
+    /*@FXML
     private TableColumn tablaReservada;
-    ObservableList<String> palabraReservada = FXCollections.observableArrayList();
+    ObservableList<String> palabraReservada = FXCollections.observableArrayList();*/
         
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -65,31 +65,44 @@ public class FXMLDocumentController implements Initializable {
             Matcher encaja=patron.matcher(busqueda);
             if(encaja.find()){
                 contadorReservadas++;
-                palabrasR=palabrasR+" "+encaja.group();
-                System.out.println(encaja.group());
+                palabrasR=palabrasR+"\n"+encaja.group();
+                //System.out.println(encaja.group());
+                //tablaReservada.setText(encaja.group());
                 //palabraReservada.add(encaja.group());
                 String resultado=encaja.replaceAll("@");
                 busqueda=resultado;
                 //tablaReservada.setText(encaja.group());
                 //tabla.setItems(palabraReservada); 
             }
+            tablaReservada.setText(palabrasR);
         }
         //System.out.println("Palabras reservadas encontradas: " + palabrasR+"\n"+"Cantidad de palabras:"+contadorReservadas);
         System.out.println("Nueva cadena:"+busqueda);
         String[] expresion={"^[a-zA-Z]+[0-9]+[a-z]+[^$%&]","^[a-zA-Z]+[0-9]+[^$%&]","^[a-zA-Z]+[^$%&]"};
+        String error="",simbolo="",operador="";
         for(int i=0;i<busqueda.length();i++){
             if(busqueda.charAt(i)!='@'&& busqueda.charAt(i)!='(' && busqueda.charAt(i)!=')' && busqueda.charAt(i)!='=' && busqueda.charAt(i)!=';' && busqueda.charAt(i)!=','){
                 ident=ident+busqueda.charAt(i);
             }else{
                 //System.out.println("Simbolo:"+busqueda.charAt(i));
                 //System.out.println(""+ident);
-                if(busqueda.charAt(i)=='=' || busqueda.charAt(i)=='<' || busqueda.charAt(i)=='>'|| busqueda.charAt(i)=='+'|| busqueda.charAt(i)=='-'|| busqueda.charAt(i)=='*'|| busqueda.charAt(i)=='/'){
+                if(/*busqueda.charAt(i)=='=' ||*/busqueda.charAt(i)=='<' || busqueda.charAt(i)=='>'|| busqueda.charAt(i)=='+'|| busqueda.charAt(i)=='-'|| busqueda.charAt(i)=='*'|| busqueda.charAt(i)=='/'){
                     contadorOperador++;
                     System.out.println(""+busqueda.charAt(i));
+                    operador=operador+"\n"+busqueda.charAt(i);
+                    //operadores.setText(operador);
+                }
+                if(busqueda.charAt(i)=='='){
+                    asignacion.setText(String.valueOf(busqueda.charAt(i)));
+                }
+                if(ident.equals("==")|| ident.equals("=>") ||ident.equals("<=")||ident.equals("!=")){
+                    contadorOperador++;
+                    operador=operador+"\n"+ident;
                 }
                 if(busqueda.charAt(i)==',' || busqueda.charAt(i)=='.'||busqueda.charAt(i)==';'||busqueda.charAt(i)==','||busqueda.charAt(i)=='('||busqueda.charAt(i)==')'){
                     contadorSim++;
                     System.out.println(""+busqueda.charAt(i));
+                    simbolo=simbolo+"\n"+busqueda.charAt(i);
                 }
                 /*if(busqueda.charAt(i)=='$'||busqueda.charAt(i)=='%'||busqueda.charAt(i)=='&'||busqueda.charAt(i)=='°'||busqueda.charAt(i)=='?'||busqueda.charAt(i)=='¿'||busqueda.charAt(i)=='!'||busqueda.charAt(i)=='-'){
                     System.out.println("Error"+busqueda.charAt(i));
@@ -97,6 +110,8 @@ public class FXMLDocumentController implements Initializable {
                 for(int k=0;k<ident.length();k++){
                         if(ident.charAt(k)=='$'||ident.charAt(k)=='%'||ident.charAt(k)=='&'||ident.charAt(k)=='°'||ident.charAt(k)=='?'||ident.charAt(k)=='¿'||ident.charAt(k)=='!'||ident.charAt(k)=='-'){
                             System.out.println("Error "+ident);
+                            error=error+"\n"+ident;
+                            ident="";
                         }
                     }
                 for(int j=0;j<expresion.length;j++){
@@ -106,11 +121,17 @@ public class FXMLDocumentController implements Initializable {
                         contadorIdent++;
                         //identificador=identificador+" "+ ident;
                         System.out.println("Identificador:"+ident);
+                        identificador=identificador+"\n"+ident;
                         ident="";
                     }/*else{
                         System.out.println("Error"+ident);
                     }*/
                 }
+                operadores.setText(operador);
+                simbolos.setText(simbolo);
+                operadores.setText(operador);
+                identificadores.setText(identificador);
+                errores.setText(error);
                 ident="";
             }
         }
